@@ -11,6 +11,7 @@ ID3Reader.prototype = {
   file_reader: null,
   result: null,
   field_offsets: {
+    tag: 128,
     title: 125,
     artist: 95,
     album: 65,
@@ -68,8 +69,7 @@ ID3Reader.prototype = {
     var result = fr.result;
     var dv = new DataView(result);
     self.result = result;
-    if(String.fromCharCode(dv.getUint8(result.byteLength - 128)) != "T" || String.fromCharCode(dv.getUint8(result.byteLength - 127)) != "A" ||
-        String.fromCharCode(dv.getUint8(result.byteLength - 126)) != "G") {
+    if(self._read_null_terminated(dv, result.byteLength - self.field_offsets.tag, 3) != "TAG") {
       console.log("Unable to locate ID3v1 information");
       return;
     }
