@@ -1,0 +1,28 @@
+<html>
+<head>
+<title>JavaScript MP3 ID3 Tag Reader</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript" src="ID3Reader.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+  window.reader = new ID3Reader($("#the_file")[0]);
+  reader.onload = function(tag) {
+    if(!tag) {
+      console.log("Unable to read ID3 Tag of file");
+      return false;
+    }
+    console.log(tag);
+  };
+});
+</script>
+</head>
+<body>
+<h1>MP3 ID3 Tag Reader Test</h1>
+
+<div><input type="file" id="the_file"/></div>
+<div>&nbsp;</div>
+<div id="results">
+  
+</div>
+
+</html>
