@@ -33,7 +33,7 @@ ID3Reader.prototype = {
       return;
     }
     var files = input_el.files;
-    if(typeof files != "undefined" && files[0] instanceof File && files[0].type == "audio/mp3") {
+    if(typeof files != "undefined" && files[0] instanceof File && files[0].type.match(/audio\/.*/)) {
       if(!self.worker) {
         self.worker = new Worker('ID3Reader_worker.js');
         self.worker.onmessage = function(evt) {

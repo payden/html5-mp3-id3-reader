@@ -37,7 +37,7 @@ self.onmessage = function(evt) {
   var dv = new DataView(result);
 
   if(_read_null_terminated(dv, result.byteLength - field_offsets.tag, 3) != "TAG") {
-    self.postMessage('wtf mate');
+    self.postMessage(null);
     return;
   }
   var title = _read_null_terminated(dv, result.byteLength - field_offsets.title, 30);
